@@ -16,10 +16,13 @@
         @auth
 
             <li>
-                <a href="" class="p-3">All Chit</a>
+                <a href="" class="p-3">{{ auth()->user()->name }}</a>
             </li>
             <li>
-                <a href="{{ route('logout') }}" class="p-3">logout</a>
+                <form action="{{ route('logout') }}" method="POST" class="p-3 inline">
+                    @csrf
+                    <button type="submit">logout</button>
+                </form>
             </li>
 
         @endauth
@@ -30,9 +33,9 @@
             <li>
                 <a href="{{ route('register') }}" class="p-3">Register</a>
             </li>
-            
+
         @endguest
-        
+
     </ul>
 
 </nav>

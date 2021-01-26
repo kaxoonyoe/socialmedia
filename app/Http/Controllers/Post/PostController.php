@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MainController extends Controller
+class PostController extends Controller
 {
-    public function post(){
+    public function index(){
         return view('posts.index');
     }
 }
