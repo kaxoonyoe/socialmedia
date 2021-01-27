@@ -3,17 +3,18 @@
     <div class="flex justify-center">
         <div class="w-8/12 bg-white p-6 rounded-lg">
 
-            <form action="{{ route('posts') }}" method="POST">
+            <form action="{{ route('posts') }}" method="POST" class="mb-4">
 
                 @csrf
 
                 <div class="mb-4">
+
                     <label for="body" class="sr-only">Body</label>
-                    <textarea name="body" id="body" cols="30" rows="4" class="w-full bg-gray-100 rounded-lg p-4 border-2" placeholder="What is on your mind?"></textarea>
+                    <textarea name="body" id="body" cols="30" rows="4" class="w-full bg-gray-100 rounded-lg p-4 border-2 @error('body') border-red-500 @enderror "  placeholder="What is on your mind?"></textarea>
                 </div>
 
                 @error('body')
-                    <div class="text-red-500 mt-2 text-sm">
+                    <div class="text-red-500 m-2 text-sm">
                         {{ $message }}
                     </div>
                 @enderror
@@ -23,6 +24,19 @@
                 </div>
 
             </form>
+            @if($posts->count())
+                @foreach($posts as $post)
+                    <div class="mb-4">
+                        <a href="" class="font-bold">{{ $post->user->name }}</a>
+                        <span class="text-gray-600 text-sm">&nbsp;{{ $post->created_at->diffForHumans() }}</span>
+                        <p class="mb-2">{{ $post->body }}</p>
+                    </div>
+                @endforeach
+
+                {{$posts->links()}}
+            @else
+                <div class="mt-4">There is no posts.</div>
+            @endif
 
         </div>
     </div>
